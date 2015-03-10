@@ -20,6 +20,23 @@ func makePairs(n int, i int) [][2]int {
 	return result
 }
 
+func printPairs(pairs [][2]int, names []string) {
+	for j, pair := range pairs {
+		if j > 0 {
+			fmt.Print(",")
+		}
+		fmt.Printf("%v,%v", names[pair[0]], names[pair[1]])
+	}
+	fmt.Println()
+	for j, pair := range pairs {
+		if j > 0 {
+			fmt.Print(",")
+		}
+		fmt.Printf("%v,%v", names[pair[1]], names[pair[0]])
+	}
+	fmt.Println()
+}
+
 func usage() {
 	fmt.Println("Usage: pairmaker Name1,Name2[,Name3...]")
 }
@@ -36,16 +53,10 @@ func main() {
 	nameList := strings.Split(names, ",")
 	n := len(nameList)
 	if n%2 == 1 {
-		nameList = append(nameList, "__")
+		nameList = append(nameList, "____")
 		n++
 	}
 	for i := 1; i < n; i++ {
-		for j, pair := range makePairs(n, i) {
-			if j > 0 {
-				fmt.Print(",")
-			}
-			fmt.Printf("%v,%v", nameList[pair[0]], nameList[pair[1]])
-		}
-		fmt.Println()
+		printPairs(makePairs(n, i), nameList)
 	}
 }
